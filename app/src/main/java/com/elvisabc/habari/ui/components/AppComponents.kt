@@ -99,6 +99,7 @@ fun HeadingTextComponent(textValue: String, centerAligned: Boolean = false){
         text = textValue,
         style = TextStyle(
             fontSize = 24.sp,
+            color = Color.Black,
             fontWeight = FontWeight.Medium
         ),
         textAlign = if(centerAligned) TextAlign.Center else TextAlign.Start
