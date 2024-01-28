@@ -9,7 +9,7 @@ Intelij and build.All the required dependencies will be downloaded and installed
 
 ## Architecture
 
-The project uses MVVM architecture pattern.
+The project uses MVVM architecture pattern with a multi-modular structure.
 
 ## Libraries
 * [JetPack Compose](https://developer.android.com/jetpack/compose) -  Accelerates UI development
@@ -23,6 +23,7 @@ The project uses MVVM architecture pattern.
 * [Kotlin Flow](https://developer.android.com/kotlin/flow) - To access data sequentially
 * [Coroutines](https://developer.android.com/kotlin/coroutines) - concurrency design pattern that you
   can use on Android to simplify code that executes asynchronously.
+* [Coil](https://coil-kt.github.io/coil/) - An image loading library for Android
 
 ## Screenshots
 |<img src="screenshots/first.png" width=200/>|<img src="screenshots/second.png" width=200/>|<img src="screenshots/three.png" width=200/>|
