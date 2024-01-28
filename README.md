@@ -1,7 +1,6 @@
 # Habari News App
 
-The App uses a set of Android Jetpack libraries plus Retrofit to dispay news data from a REST API (https://newsapi.org/)
-. The App uses Kotlin.
+The App uses a set of Android Jetpack libraries plus Retrofit to dispay news data from a REST API (https://newsapi.org/).
 
 ### Prerequisites
 
