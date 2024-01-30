@@ -32,10 +32,18 @@ fun HomeScreen(
         initialPage = 0,
         initialPageOffsetFraction = 0f
     ){
-        100
+
+        newsResponse.let {
+            if (it is ResourceState.Success) {
+                it.data.articles?.size
+            } else {
+                1
+            }
+        } ?: 1
     }
 
     VerticalPager(
+        beyondBoundsPageCount = 2,
         state = pagerState,
         modifier = Modifier
             .fillMaxSize(),
@@ -70,10 +78,6 @@ fun HomeScreen(
 
         }
     }
-
-
-
-
 
 }
 
