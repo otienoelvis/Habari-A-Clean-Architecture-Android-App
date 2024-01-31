@@ -1,10 +1,10 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.elvisabc.habari.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -30,13 +30,21 @@ import com.elvisabc.habari.ui.theme.Purple40
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -261,18 +269,105 @@ fun SearchTextComponent(textValue: String = "", onSearchTextEntered: (String) ->
     )
 }
 
-@Preview(showBackground = false)
+//@Preview(showBackground = false)
+//@Composable
+//fun TopBarComponentPreview(){
+//    TopBarComponent()
+//}
+
+//@Preview(showBackground = true)
+//@Composable
+//fun SearchTextComponentPreview(){
+//    SearchTextComponent(textValue = "Search", onSearchTextEntered = {})
+//}
+
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBarComponentPreview(){
-    TopBarComponent()
+fun TopAppBarComponentWithScaffold(){
+
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = "Habari")
+                },
+                navigationIcon = {
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Default.Menu,
+                            contentDescription = "Go back")
+                    }
+                },
+                actions = {
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Default.FavoriteBorder,
+                            contentDescription = "Mark as favourite")
+                    }
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Default.Edit,
+                            contentDescription = "Edit")
+                    }
+                },
+                scrollBehavior = scrollBehavior
+            )
+        }
+    ){ values ->
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(values)
+        ){
+            items(100){
+                Text(
+                    text = "Item : $it",
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
+        }
+    }
+}
+
+
+@Composable
+fun TopAppBarComponent(scrollBehavior: TopAppBarScrollBehavior){
+    TopAppBar(
+        title = {
+            Text(text = "Habari")
+        },
+        navigationIcon = {
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Default.Menu,
+                    contentDescription = "Go back")
+            }
+        },
+        actions = {
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Default.FavoriteBorder,
+                    contentDescription = "Mark as favourite")
+            }
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = "Edit")
+            }
+        },
+        scrollBehavior = scrollBehavior
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
-fun SearchTextComponentPreview(){
-    SearchTextComponent(textValue = "Search", onSearchTextEntered = {})
+fun TopAppBarComponentPreview(){
+    TopAppBarComponent(TopAppBarDefaults.pinnedScrollBehavior())
 }
-
-
 
         

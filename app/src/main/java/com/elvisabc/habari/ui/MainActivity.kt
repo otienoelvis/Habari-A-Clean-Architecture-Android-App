@@ -27,6 +27,13 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize()
                         .background(Color.White)
                 ) {
+//                    Scaffold(
+//                        modifier = Modifier
+//                            .fillMaxSize()
+//                    ) { values ->
+//                        AppNavigationGraph(values)
+//                    }
+//                    TopAppBarComponent()
                     AppEntryPoint()
                 }
             }
