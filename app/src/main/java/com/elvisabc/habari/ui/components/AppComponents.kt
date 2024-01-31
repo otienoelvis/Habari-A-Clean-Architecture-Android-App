@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -28,6 +29,12 @@ import com.elvisabc.habari.data.entity.NewsResponse
 import com.elvisabc.habari.ui.theme.Purple40
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -35,6 +42,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import com.elvisabc.habari.R
 import com.elvisabc.habari.data.entity.Article
@@ -127,7 +135,7 @@ fun NewsRowComponent(page: Int, article: Article) {
             contentScale = ContentScale.Crop,
             placeholder = painterResource(id = R.drawable.image_placeholder),
             error = painterResource(id = R.drawable.image_placeholder),
-            )
+        )
 
         Spacer(modifier = Modifier.size(8.dp))
 
@@ -171,15 +179,15 @@ fun EmptyStateComponent(){
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(id = R.drawable.nothing), 
+            painter = painterResource(id = R.drawable.nothing),
             contentDescription = null
         )
-        
+
         HeadingTextComponent(
             textValue = stringResource(R.string.couldn_t_get_any_news_now_please_check_again_later),
             centerAligned = true
         )
-        
+
     }
 }
 
@@ -214,9 +222,56 @@ fun internetComponent(): Boolean{
 
 
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopBarComponent(){
+//    TopAppBar(title = { /*TODO*/ })
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(56.dp)
+            .background(color = Color.White)
+    ) {
+        SearchTextComponent(onSearchTextEntered={} )
+    }
+}
 
+@Composable
+fun SearchTextComponent(textValue: String = "", onSearchTextEntered: (String) -> Unit){
 
+    OutlinedTextField(
+        value = textValue,
+        onValueChange = {
+            onSearchTextEntered.invoke(it)
+        },
+        textStyle = TextStyle(),
+        placeholder = {
+            Text(
+                text = "Search",
+                style = TextStyle(
+                    color = Color.Black,
+                    fontSize = 18.sp
+                ),
+            )
+        },
+        shape = RoundedCornerShape(24.dp),
+        trailingIcon = {
+            Image(imageVector = Icons.Outlined.Search, contentDescription = "search news icon")
+        }
+    )
+}
 
+@Preview(showBackground = false)
+@Composable
+fun TopBarComponentPreview(){
+    TopBarComponent()
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SearchTextComponentPreview(){
+    SearchTextComponent(textValue = "Search", onSearchTextEntered = {})
+}
 
 
 
