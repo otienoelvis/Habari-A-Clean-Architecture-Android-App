@@ -42,6 +42,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.runtime.remember
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -287,6 +288,7 @@ fun SearchTextComponent(textValue: String = "", onSearchTextEntered: (String) ->
 fun TopAppBarComponentWithScaffold(){
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val list = remember { (1..100).toList() }
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -324,7 +326,8 @@ fun TopAppBarComponentWithScaffold(){
                 .fillMaxSize()
                 .padding(values)
         ){
-            items(100){
+
+            items(list.size){
                 Text(
                     text = "Item : $it",
                     modifier = Modifier.padding(16.dp)
@@ -336,17 +339,13 @@ fun TopAppBarComponentWithScaffold(){
 
 
 @Composable
-fun TopAppBarComponent(scrollBehavior: TopAppBarScrollBehavior){
+fun TopAppBarComponent(scrollBehavior: TopAppBarScrollBehavior, topAppBarTitle: String, navigationIcon: @Composable () -> Unit){
     TopAppBar(
         title = {
-            Text(text = "Habari")
+            Text(text = topAppBarTitle)
         },
         navigationIcon = {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(
-                    imageVector = Icons.Default.Menu,
-                    contentDescription = "Go back")
-            }
+            navigationIcon.invoke()
         },
         actions = {
             IconButton(onClick = { /*TODO*/ }) {
@@ -364,10 +363,10 @@ fun TopAppBarComponent(scrollBehavior: TopAppBarScrollBehavior){
     )
 }
 
-@Preview(showBackground = true)
-@Composable
-fun TopAppBarComponentPreview(){
-    TopAppBarComponent(TopAppBarDefaults.pinnedScrollBehavior())
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun TopAppBarComponentPreview(){
+//    TopAppBarComponent(TopAppBarDefaults.pinnedScrollBehavior(), topAppBarTitle = stringResource(R.string.habari))
+//}
 
         

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Habari</string>
     <string name="couldn_t_get_any_news_now_please_check_again_later">Couldn\'t get any news now\nPlease check again later.</string>
+    <string name="habari">Habari</string>
 </resources>

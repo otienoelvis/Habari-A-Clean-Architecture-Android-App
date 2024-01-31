@@ -9,7 +9,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.VerticalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarScrollBehavior
@@ -18,9 +22,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.elvisabc.habari.R
 import com.elvisabc.habari.data.entity.NewsResponse
 import com.elvisabc.habari.ui.components.EmptyStateComponent
 import com.elvisabc.habari.ui.components.Loader
@@ -30,7 +36,7 @@ import com.elvisabc.habari.ui.viewmodel.NewsViewModel
 import com.elvisabc.utilities.ResourceState
 
 const val TAG = "HomeScreen"
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     newsViewModel: NewsViewModel = hiltViewModel(),
@@ -41,7 +47,7 @@ fun HomeScreen(
 
     val pagerState = rememberPagerState(
         initialPage = 0,
-        initialPageOffsetFraction = 0f
+        initialPageOffsetFraction = -0.5f
     ){
 
         newsResponse.let {
@@ -58,7 +64,16 @@ fun HomeScreen(
             .fillMaxSize()
             .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            TopAppBarComponent(scrollBehavior)
+            TopAppBarComponent(
+                scrollBehavior,
+                topAppBarTitle = stringResource(R.string.habari),
+                navigationIcon = {
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Default.Menu,
+                            contentDescription = "Go back")
+                    }
+                })
         }
     ) { values ->
         VerticalPager(

@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.elvisabc.habari.ui.components.TopAppBarComponentWithScaffold
 import com.elvisabc.habari.ui.navigation.AppNavigationGraph
 import com.elvisabc.habari.ui.theme.HabariTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +36,7 @@ class MainActivity : ComponentActivity() {
 //                    }
 //                    TopAppBarComponent()
                     AppEntryPoint()
+//                    TopAppBarComponentWithScaffold()
                 }
             }
         }
